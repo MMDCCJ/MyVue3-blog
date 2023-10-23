@@ -1,27 +1,50 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div id="app">
+    <el-container>
+      <el-header>
+        <B_Header />
+      </el-header>
+
+    </el-container>
+    <el-footer>
+      <B_Footer/>
+    </el-footer>
+    <!-- toTop -->
+    <el-backtop :visibility-height="500"></el-backtop>
+  </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
-
+import B_Header from './components/Blog-Header.vue';
+import B_Footer from './components/Blog-footer.vue';
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld
+    B_Header,
+    B_Footer
   }
 });
 </script>
-
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+
+}
+
+body {
+  /* 网页的背景色 */
+  /* #66ccff */
+  background-color: #130f0c;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 </style>
+<style lang="css" scoped>
+.el-main {
+  padding: 0;
+}
+</style>
+
