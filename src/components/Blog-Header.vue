@@ -1,20 +1,16 @@
 <template>
     <el-row>
         <el-col :span="24" justify="end">
-            <el-menu 
-            :default-active="activeIndex" 
-            mode="horizontal"
-            :ellipsis="false"
-            id="TopNavicate">
+            <el-menu :default-active="activeIndex" mode="horizontal" :ellipsis="false" id="TopNavicate">
                 <!-- 该div将菜单撑到右边 -->
-                <div style="flex-grow: 1;"/>
+                <div style="flex-grow: 1;" />
                 <el-menu-item index="3">
                     <a> 文 章 编 辑 </a>
                 </el-menu-item>
                 <el-menu-item index="2">
                     <a> 管 理 </a>
                 </el-menu-item>
-                <el-menu-item index="1">
+                <el-menu-item index="1" @click="toMainPage">
                     <a>主 页</a>
                 </el-menu-item>
             </el-menu>
@@ -22,13 +18,21 @@
     </el-row>
 </template>
 <script lang="ts" setup>
-import { ref } from 'vue';
-import { onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
+import { useRoute } from 'vue-router'
 // 定义数据
 const activeIndex = ref('1');
+const route = useRoute();
 onMounted(() => {
-    console.log(1);
+    
+    const routeName = route.name;
+    console.log(routeName);
+    
 })
+const toMainPage = ()=>{
+    console.log(route.name);
+    
+}
 </script>
 <style scoped>
 #TopNavicate {
