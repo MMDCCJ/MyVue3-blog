@@ -3,15 +3,24 @@
         <div class="sloganBox">
             <p>"{{ welcomeMsg.saying }}" --{{ welcomeMsg.speaker }}</p>
             <a @click="anchorPoint" id="toMain" ref="toTopic">
-                <p class="el-icon-bottom float-element"></p>
+                <!-- <el-icon><ArrowDown /></el-icon> -->
+                <svg class="float-element" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-ea893728="">
+                    <path fill="currentColor"
+                        d="M831.872 340.864 512 652.672 192.128 340.864a30.592 30.592 0 0 0-42.752 0 29.12 29.12 0 0 0 0 41.6L489.664 714.24a32 32 0 0 0 44.672 0l340.288-331.712a29.12 29.12 0 0 0 0-41.728 30.592 30.592 0 0 0-42.752 0z">
+                    </path>
+                </svg>
             </a>
         </div>
     </div>
 </template>
 <script lang="ts" setup>
-import { computed, nextTick } from 'vue'
+import { computed, nextTick,onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 const route = useRoute()
+onMounted(()=>{
+    console.log("当前的route",route);
+    
+})
 const welcomeMsg = computed(() => {
     let msg = JSON.parse(localStorage?.getItem('sayings') as string);
     if (!msg) {
@@ -40,6 +49,58 @@ const anchorPoint = function () {
     })
 }
 </script>
-<style lang="ts" setup>
+<style lang='css' scoped>
+#intro {
+    background-image: url('../../public/mainzip.jpg');
+    background-size: cover;
+    width: 100%;
+    height: 80vh;
+    border-radius: 5px;
+}
+#toMain{
+    width: 5%;
+    height: 5%;
+}
 
+.sloganBox {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+p {
+    position: relative;
+    color: white;
+    opacity: 0.8;
+    font-size: 4vh;
+}
+
+a {
+    cursor: pointer;
+}
+
+/* 箭头上下浮动动画效果 */
+@keyframes float-up-down {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.float-element {
+    animation: float-up-down 1.65s infinite;
+    color: white;
+}
 </style>

@@ -6,6 +6,7 @@
       </el-header>
       <el-main>
         <B_Intro />
+        <router-view name="me"/>
       </el-main>
     </el-container>
     <el-footer>
