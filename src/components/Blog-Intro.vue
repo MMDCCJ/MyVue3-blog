@@ -3,7 +3,7 @@
         <div class="sloganBox">
             <p>"{{ welcomeMsg.saying }}" --{{ welcomeMsg.speaker }}</p>
             <a @click="anchorPoint" id="toMain" ref="toTopic">
-                <!-- <el-icon><ArrowDown /></el-icon> -->
+                <!-- 跳动下箭头 -->
                 <svg class="float-element" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" data-v-ea893728="">
                     <path fill="currentColor"
                         d="M831.872 340.864 512 652.672 192.128 340.864a30.592 30.592 0 0 0-42.752 0 29.12 29.12 0 0 0 0 41.6L489.664 714.24a32 32 0 0 0 44.672 0l340.288-331.712a29.12 29.12 0 0 0 0-41.728 30.592 30.592 0 0 0-42.752 0z">
@@ -14,32 +14,44 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { computed, nextTick,onMounted } from 'vue'
+import { computed, nextTick, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 const route = useRoute()
-onMounted(()=>{
-    console.log("当前的route",route);
-    
+
+onMounted(() => {
+    console.log("当前的route", route);
+
 })
-const welcomeMsg = computed(() => {
-    let msg = JSON.parse(localStorage?.getItem('sayings') as string);
-    if (!msg) {
-        // api失效时默认标语
-        msg = {
-            saying: 'Cogito, ergo sum.',
-            speaker: '笛卡尔 (René Descartes)'
+
+// 
+const welcomeMsg = computed({
+    get: () => {
+        let data = JSON.parse(localStorage?.getItem('sayings') as string);
+        let msg: Slogan;
+        if (!data) {
+            // api失效时默认标语
+            msg = {
+                saying: 'Cogito, ergo sum.',
+                speaker: '笛卡尔 (René Descartes)'
+            }
+        } else {
+            // 获取随机标语
+            let id = Math.random() * 5 * 4;
+            id = Math.floor(id);
+            msg = data[id];
         }
-    } else {
-        // 获取随机标语
-        let id = Math.random() * 5 * 4;
-        id = Math.floor(id);
-        msg = msg[id];
+        return msg
+    },
+    // 不写报错
+    set: (value: Slogan) => {
+        value
     }
-    return msg
 })
 const anchorPoint = function () {
+    console.log("当前的路由名称", route.name);
+
     nextTick(() => {
-        if (route.name === "main") {
+        if (route.name === "主页") {
             document.querySelector("#me")?.scrollIntoView(true);
         } else if (route.name === "article") {
             document.querySelector(".container")?.scrollIntoView(true);
@@ -57,7 +69,8 @@ const anchorPoint = function () {
     height: 80vh;
     border-radius: 5px;
 }
-#toMain{
+
+#toMain {
     width: 5%;
     height: 5%;
 }
@@ -104,3 +117,4 @@ a {
     color: white;
 }
 </style>
+../type/env

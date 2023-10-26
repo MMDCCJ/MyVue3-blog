@@ -24,14 +24,13 @@ import { useRoute } from 'vue-router'
 const activeIndex = ref('1');
 const route = useRoute();
 onMounted(() => {
-    
     const routeName = route.name;
     console.log(routeName);
-    
+
 })
-const toMainPage = ()=>{
+const toMainPage = () => {
     console.log(route.name);
-    
+
 }
 </script>
 <style scoped>
