@@ -18,38 +18,36 @@ import { computed, nextTick, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 const route = useRoute()
 
-onMounted(() => {
-    console.log("当前的route", route);
-
-})
-
-// 
 const welcomeMsg = computed({
     get: () => {
         let data = JSON.parse(localStorage?.getItem('sayings') as string);
+        // eslint-disable-next-line
         let msg: Slogan;
-        if (!data) {
-            // api失效时默认标语
+        if (data == null) {
+            // 失效时默认标语
             msg = {
                 saying: 'Cogito, ergo sum.',
                 speaker: '笛卡尔 (René Descartes)'
             }
         } else {
             // 获取随机标语
-            let id = Math.random() * 5 * 4;
+            let id = Math.random() * data.length;
             id = Math.floor(id);
             msg = data[id];
         }
         return msg
     },
-    // 不写报错
+    // eslint-disable-next-line
     set: (value: Slogan) => {
         value
     }
-})
-const anchorPoint = function () {
-    console.log("当前的路由名称", route.name);
+});
+onMounted(() => {
+    console.log("当前的route", route);
 
+})
+
+const anchorPoint = function () {
     nextTick(() => {
         if (route.name === "主页") {
             document.querySelector("#me")?.scrollIntoView(true);

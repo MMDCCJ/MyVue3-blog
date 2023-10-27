@@ -1,4 +1,4 @@
-type Slogan = {
+declare type Slogan = {
     /**
      *  名言
      */

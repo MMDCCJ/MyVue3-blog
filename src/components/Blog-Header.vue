@@ -18,16 +18,11 @@
     </el-row>
 </template>
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { useRoute } from 'vue-router'
 // 定义数据
 const activeIndex = ref('1');
 const route = useRoute();
-onMounted(() => {
-    const routeName = route.name;
-    console.log(routeName);
-
-})
 const toMainPage = () => {
     console.log(route.name);
 
