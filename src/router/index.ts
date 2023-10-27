@@ -12,14 +12,13 @@ const router = createRouter({
                 // pageNation: blog_pageNation
             }
         },
-        // {
-        //     name: 'article',
-        //     path: '/article/:id',
-        //     components: {
-        //         article: blog_articlepage
-        //     },
-        //     props: true
-        // },
+        {
+            name: '文章详情',
+            path: '/article/:id',
+            components: {
+                // article: blog_articlepage
+            },
+        }
     ]
 })
 export default router;
