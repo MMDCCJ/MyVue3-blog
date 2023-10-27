@@ -1,11 +1,10 @@
-import {createRouter,createMemoryHistory} from 'vue-router'
-import B_footer from '../components/Blog-footer.vue'
+import { createRouter, createMemoryHistory } from 'vue-router'
 import B_AboutMe from '../pages/Blog-AboutMe.vue'
 const router = createRouter({
-    history:createMemoryHistory(),
+    history: createMemoryHistory(),
     routes: [
         {
-            name:'主页',
+            name: '主页',
             path: '',
             components: {
                 me: B_AboutMe
@@ -21,11 +20,6 @@ const router = createRouter({
         //     },
         //     props: true
         // },
-        {
-            name: "editing",
-            path: '/editing',
-            components: B_footer
-        }
     ]
 })
 export default router;
