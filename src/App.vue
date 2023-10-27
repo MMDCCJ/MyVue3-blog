@@ -6,23 +6,26 @@
       </el-header>
       <el-main>
         <B_Intro />
-        <router-view name="me"/>
+        <router-view name="me" />
+        <router-view name="articleList" />
+        <router-view name="article" />
+        <router-view name="articleEditor" />
       </el-main>
     </el-container>
     <el-footer>
-      <B_Footer/>
+      <B_Footer />
     </el-footer>
     <!-- toTop -->
     <el-backtop :visibility-height="500"></el-backtop>
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 import { defineComponent } from 'vue';
 import B_Header from './components/Blog-Header.vue';
 import B_Footer from './components/Blog-footer.vue';
 import B_Intro from './components/Blog-Intro.vue'
-export default defineComponent({
+defineComponent({
   name: 'App',
   components: {
     B_Header,

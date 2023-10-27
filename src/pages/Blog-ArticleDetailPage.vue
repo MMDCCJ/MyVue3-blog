@@ -1,12 +1,12 @@
 <template>
     <el-container class="container">
         <el-aside width="16%">
-            <ul class="aside" :class="defaultData.asideClass">
+            <!-- <ul class="aside" :class="defaultData.asideClass">
                 <li v-for="item in defaultData.aside" :key="item" @click="moveToTitle(item.id)" class="asideNav">
                     {{ "\xa0\xa0\xa0\xa0".repeat(item.level) + item.tag.slice(0, 10) }}
                     <span v-if="item.tag.length > 10">...</span>
                 </li>
-            </ul>
+            </ul> -->
         </el-aside>
         <el-main>
             <article ref="articleContainer" class="article-main">
@@ -20,10 +20,11 @@
 <script setup lang="ts">
 import { reactive, onMounted } from "vue";
 import { useStore } from "vuex";
-import { useRoute } from "vue-router";
-import { nanoid } from 'nanoid';
-import axios from 'axios';
+import { useRoute, useRouter } from "vue-router";
+// import { nanoid } from 'nanoid';
+import axios from "../../node_modules/axios";
 const route = useRoute();
+const router = useRouter();
 const store = useStore();
 const defaultData = reactive({
     artId: '0',
@@ -35,7 +36,7 @@ const defaultData = reactive({
 });
 onMounted(() => {
     defaultData.artId = route.params.id as string;
-    if (defaultData.artId !== '0') {
+    if (defaultData.artId === '0') {
         axios({
             url: store.state.baseIP + '/api/article/content',
             method: 'GET',
@@ -44,7 +45,20 @@ onMounted(() => {
                 id: defaultData.artId
             }
         }).then((res) => {
-            console.log(res.data);
+            switch (res.data.code) {
+                case 200:
+                    console.log();
+                    break;
+                case 204:
+                    console.log(res.data.msg);
+                    defaultData.loading = res.data.msg + "即将返回主页";
+                    setTimeout(() => {
+                        router.push('/');
+                    }, 1500);
+                    break;
+                default:
+                    console.log("未知的代码");
+            }
         })
     }
 })
@@ -81,7 +95,7 @@ onMounted(() => {
     margin-bottom: 2.5rem;
     font-weight: 800;
     background-image: linear-gradient(to right, #4BC0C8, #C779D0, #FEAC5E);
-    -webkit-background-clip: text;
+    /* -webkit-background-clip: text; */
     -webkit-text-fill-color: transparent;
 }
 
@@ -89,7 +103,7 @@ onMounted(() => {
     margin-bottom: 2rem;
     font-size: 21px;
     background-image: linear-gradient(to right, #83a4d4, #b6fbff);
-    -webkit-background-clip: text;
+    /* -webkit-background-clip: text; */
     -webkit-text-fill-color: transparent;
 }
 
@@ -103,8 +117,6 @@ onMounted(() => {
 }
 </style>
 <style lang='css' scoped>
-.asideFix {}
-
 article {
     color: white;
     /* border: 1px solid #66ccff; */

@@ -30,11 +30,10 @@ const routeToPages = (index: number) => {
             router.push({ name: '主页' });
             break;
         case 2:
-            console.log("coding");
             // router.push('/management');
             break;
         case 3:
-            console.log("coding");
+            router.push({ name: '文章编辑' })
             // router.push('/article');
             break;
     }

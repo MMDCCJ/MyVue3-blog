@@ -2,7 +2,7 @@ import { createStore } from 'vuex'
 
 export default createStore({
   state: {
-    "baseIP": "www.mmdccj.top"
+    "baseIP": "http://www.mmdccj.top:9001"
   },
   getters: {
   },

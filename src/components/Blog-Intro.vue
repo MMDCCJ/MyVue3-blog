@@ -14,7 +14,7 @@
     </div>
 </template>
 <script lang="ts" setup>
-import { computed, nextTick, onMounted } from 'vue'
+import { computed, nextTick } from 'vue'
 import { useRoute } from 'vue-router'
 const route = useRoute()
 
@@ -42,10 +42,6 @@ const welcomeMsg = computed({
         value
     }
 });
-onMounted(() => {
-    console.log("当前的route", route);
-
-})
 
 const anchorPoint = function () {
     nextTick(() => {
@@ -53,7 +49,7 @@ const anchorPoint = function () {
             document.querySelector("#me")?.scrollIntoView(true);
         } else if (route.name === "article") {
             document.querySelector(".container")?.scrollIntoView(true);
-        } else if (route.name === "editing") {
+        } else if (route.name === "文章编辑") {
             document.querySelector(".container")?.scrollIntoView(true);
         }
     })
